@@ -1,0 +1,319 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 50%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+}
+
+@keyframes timeOut {
+  from {
+    width: 100%
+  }
+  to {
+    width: 0%
+  }
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #eeeeee;
+}
+
+.chat-room {
+  position: relative;
+  border-radius: 0.5rem;
+  text-align: center;
+  background-color: white;
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 1020px) {
+  .chat-room {
+    max-width: 450px;
+    max-height: 900px;
+  }
+}
+
+
+/* 모달 */
+.info-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+
+}
+
+.info-modal-form  {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+  background-color: white;
+  padding: 2em;
+  border-radius: 0.5em;
+}
+
+.info-modal-image {
+  width: 150px;
+  height: 150px;
+  background-image: url("https://raw.githubusercontent.com/JaeKP/image_repo/main/img/socketio_chat_user_image.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.info-modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+}
+
+.info-modal button{
+  font-size: 0.9rem;
+  font-weight: 600;
+  width: 100%;
+  padding: 0.7em 0;
+  text-align: right;
+}
+
+label[for="name"]{
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 3em;
+}
+
+.info-modal input[type="text"]{
+  border-bottom: 1px solid  #999;
+  height: 1.5em;
+  font-size: 1.1rem;
+}
+
+input[type="text"]::placeholder {
+  color: #cccccccc;
+}
+
+/* 채팅 영역 */
+.chat {
+  height: 90%;
+  /* height: 60%; */
+  width: 100%;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  transition: 0.5s linear;
+}
+
+.chat::-webkit-scrollbar {
+  display: none;
+}
+
+/* 접속 알림 */
+.message-connect, .message-disconnect {
+  margin: 2em 0;
+}
+
+.connect, .disconnect {
+  font-size: 1rem;
+  max-width: 95%;
+  text-align: center;
+  font-weight: 500;
+  border-radius: 2em;
+  margin: 0 auto;
+}
+
+/* 내가 보낸 메시지 */
+.message-me {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: right;
+  margin: 2em;
+  animation: fadeIn 0.5s;
+}
+
+.me {
+  display: -webkit-inline-box;
+  max-width: 80%;
+  text-align: right;
+  font-size: 1.1rem;
+  padding: 1em 1.5em;
+  border-radius:  1.5em 1.5em 0 1.5em;
+  background-image: linear-gradient(25deg, #8254e4, #8c77cb, #8e97b1, #87b595);
+  color: white;
+  font-weight: 500;
+}
+
+.me-time {
+  width: 100%;
+  text-align: right;
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: #555
+}
+
+/* 상대방이 보낸 메시지 */
+.message-other {
+  margin: 2em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  gap: 0.2em;
+  animation: fadeIn 0.5s;
+}
+
+.other-name, .other-time {
+  width: 100%;
+  text-align: left;
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: #555
+}
+
+.other-name {
+  margin-left: 1em;
+}
+
+.other {
+  display: inline-block;
+  max-width: 80%;
+  text-align: left;
+  font-size: 1.1rem;
+  padding: 1em 1.5em;
+  border-radius:  1.5em 1.5em 1.5em 0;
+  background-color: #eeeeee;
+  font-weight: 500;
+}
+
+
+/* 채팅 작성 창 */
+.chat-bottom {
+  height: calc(10% - 0.5em);
+  /* height: calc(40% - 0.5em); */
+  border-top: 1px solid #ddd;
+  margin: 0.5em 2em 0 2em ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.chat-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 75%;
+  /* height: 15%; */
+  width: 100%;
+  border-radius: 10rem;
+  border: 1px solid #ddd;
+}
+
+.chat-emoji-form{
+  height: 75%;
+  width: 100%;
+  font-size: 2.8vh;
+  /* display: flex; */
+  display: none;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5em;
+  transition: 0.5s linear;
+
+}
+
+.chat-form input{
+  margin-left: 1rem;
+  height: 90%;
+  width: 70%;
+  flex-grow:1;
+  font-size: 1rem;
+}
+
+.chat-form input:focus {
+  outline: none;
+}
+
+.chat-form input::placeholder {
+  font-size: 1rem;
+  color: #999;  
+}
+
+.chat-form button {
+  margin-right: 1rem;
+  font-size: 1.5rem;
+  height: 90%;
+  color: #8254e4;
+  border-radius: 20rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.chat-emoji{
+  height: 85%;
+  width: 1.5em;
+  background-image:url("https://raw.githubusercontent.com/JaeKP/image_repo/main/img/socketio.emogi.png") ;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+
+
+
+/* 알럿 */
+.alert {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 5;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+
+}
+
+.alert-content {
+  min-width: 70%;
+  background-color: white;
+  padding: 2em;
+  font-weight: 500;
+  border-radius: 0.5em ;
+  animation: fadeIn 0.5s;
+}
+
+.alert-content p:nth-child(1) {
+  font-size: 2rem;
+  padding-bottom: 0.5em;
+}
+
+.alert-time {
+  margin-top: 1rem;
+  width: 100%;
+  height:7px;
+  background-color: rgba(240, 58, 23);
+  animation: timeOut 1.5s linear;
+}

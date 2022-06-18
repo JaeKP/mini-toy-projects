@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>채팅창</title>
+    <!-- GoogleFont -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/index.css" />
+    <link rel="stylesheet" href="./css/default.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="chat-room">
+        <div class="chat">
+          <!-- message-->
+        </div>
+        <div class="chat-bottom">
+          <form class="chat-form">
+            <input
+              type="text"
+              class=".chat-input"
+              placeholder="메시지를 입력해주세요"
+            />
+            <div class="chat-emoji"></div>
+            <button type="submit">➤</button>
+          </form>
+          <div class="chat-emoji-form">
+            <span>😀</span><span>😁</span><span>😂</span><span>🤣</span><span>😃</span><span>😄</span><span>😅</span>
+            <span>😆</span><span>😉</span><span>😊</span><span>😋 </span><span>😎</span><span>😍</span><span>😘</span> 
+            <span>🥰</span><span>😗</span><span>😙</span><span>😚</span><span>🙂</span><span>🤗</span><span>🤩</span>
+            <span>🤔</span><span>🤨</span><span>😐</span><span>😑</span><span>😶</span><span>🙄</span><span>😏</span>
+            <span>😣</span><span>😥</span><span>😮</span><span>🤐</span><span>😯</span><span>😪</span><span>😫</span>
+          </div>
+        </div>
+        <!-- modal -->
+        <div class="info-modal">
+          <form class="info-modal-form">
+            <div class="info-modal-image"></div>
+            <div class="info-modal-content">
+              <label for="name">닉네임을 입력해주세요</label>
+              <input
+                type="text"
+                id="name"
+                maxlength="15"
+                placeholder="치킨먹고싶다"
+                required
+              />
+              <button type="submit">입장하기</button>
+            </div>
+          </form>
+        </div>
+        <!-- alert -->
+        <div class="alert">
+          <div class="alert-content">
+            <p>📛</p>
+            <p></p>
+            <div class="alert-time"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./socket.io/socket.io.js"></script>
+    <script src="./js/index.js"></script>
+    <script src="./js/createMessage.js"></script>
+  </body>
+</html>

@@ -1,0 +1,164 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+  text-align: center; 
+  font-family:'Noto Sans KR', 'Open Sans';
+}
+
+body {
+  background-image: url(image/back.jpg);
+  /* background: linear-gradient(70deg, red,violet, indigo, blue, green, yellow, orange, red ); */
+  height: 100%;
+  width: 100%;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
+.head{
+  display: flex;
+  justify-content: space-between;
+  align-content: center; 
+  padding: 2rem;
+}
+
+
+.hidden {
+  display: none;
+}
+
+.hmm {
+  padding-top: 2rem;
+  width: 30rem;
+  
+}
+
+.modal {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modalbody{
+  position: absolute; 
+  background-color: rgb(255, 255, 255); 
+  top: 50%; 
+  left: 50%;
+  width: 30rem; 
+  height: 40rem; 
+  padding: 3rem; 
+  border-radius: 10px; 
+  transform: translateX(-50%) translateY(-50%);
+
+}
+
+.choicefood {
+  font-size: 10rem;
+  font-weight: 900;
+  font-style: italic;
+  text-shadow: -10px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+  color: red;
+}
+
+.choicefood span {
+  text-decoration: underline;
+}
+
+.clock {
+  font-size: 3rem;
+  color: white;
+  font-style: italic;text-shadow: -3px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+  
+}
+
+.favorite{
+  font-style: italic;
+  font-size: 3rem;
+  font-weight: bold;
+  text-shadow: -3px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+  color:orange
+
+}
+
+.greeting {
+  padding-top: 5%;
+  font-size: 7rem;
+  font-weight: 900;
+  font-style: italic;
+  text-shadow: -10px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+  color: yellow;
+}
+
+.menu {
+  padding-top: 2%;
+  font-size:6rem;
+  font-weight: 900;
+  font-style: italic;
+  text-shadow: -10px 0 rgb(255, 255, 255), 0 1px rgb(255, 255, 255), 1px 0 rgb(255, 255, 255), 0 -1px rgb(255, 255, 255);
+  color: black;
+}
+
+.choice {
+  display: flex;
+  justify-content: center;
+  align-content: center; 
+  padding: 5rem;
+}
+
+.like{
+  font-style: italic;
+  font-size: 3rem;
+  font-weight: bold;
+  text-shadow: -3px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+  color:red
+}
+
+.hate{
+  font-style: italic;
+  font-size: 3rem;
+  font-weight: bold;
+  text-shadow: -3px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+  color: red
+}
+
+.quote{
+  font-size:5rem;
+  font-weight: 900;
+  font-style: italic;
+  text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+  color: black;
+}
+
+.author{
+  font-style: italic;
+  font-size: 3rem;
+  font-weight: bold;
+  color: rgb(0, 0, 0)
+}
+
+.modalbody{
+  font-size: 1.5rem;
+  font-weight: 900;
+  font-style: italic;
+}
+
+#title{
+  padding-bottom: 1rem;
+  font-style: italic;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+  color:orange
+}
+
+.home {
+  padding-right: 10rem;
+  padding-left: 10rem;
+  font-size:3rem;
+  font-weight: 900;
+  text-shadow: -3px 0 rgb(255, 0, 0), 0 1px rgb(0, 255, 128), 1px 0 rgb(0, 255, 128), 0 -1px rgb(0, 255, 128);
+  color: black;
+}
