@@ -8,8 +8,6 @@
 
 ### 1) 기획: 1주차 발표자료.pdf 요약본
 
-<br>
-
 ![019](https://raw.githubusercontent.com/JaeKP/image_repo/main/img/019.png)
 
 <br>
@@ -21,8 +19,6 @@
 ### 2) 1주차 진행 상황
 
 <br>![mini-toy-projects-wazabyo-00](https://raw.githubusercontent.com/JaeKP/image_repo/main/img/mini-toy-projects-wazabyo-00.gif)
-
-<br>
 
 #### 링피트 기록 CRUD
 
