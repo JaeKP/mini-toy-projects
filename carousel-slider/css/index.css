@@ -1,7 +1,7 @@
 .container {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: flex-start;
   flex-direction: column;
   gap: 2vw;
   width: 100%;
@@ -10,9 +10,30 @@
   overflow-x: hidden;
 }
 
+.carousel {
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+
 .card-list {
   display: flex;
+  position: absolute;
   flex-shrink: 0;
   gap: 2vw;
-  overflow-x: hidden;
+  transition: 1s;
+}
+
+
+.left, .right {
+  position: absolute;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.7);
+  transition: 1s;
+  z-index: 2;
+}
+
+.right {
+  right: 0;
 }
