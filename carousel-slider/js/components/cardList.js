@@ -2,17 +2,22 @@ import { Card } from "./card.js";
 
 // 카드리스트를 생성한다.
 function CardList(data) {
-  this.divElem = document.createElement("div");
-  this.divElem.classList.add("card-list");
+  this.cardListElem = document.createElement("div");
+  this.cardListElem.classList.add("card-list");
+  this.cardListElem.setAttribute("data-count", 0);
+  this.cardListElem.setAttribute("id", data.id);
 
-  // DOM에 카드리스트 생성하기
-  document.querySelector(".container").appendChild(this.divElem);
-  this.init(data);
+
+  // CardList 생성하기
+  document.querySelector(".carousel:last-child").appendChild(this.cardListElem);
+  
+  // Card 생성하기
+  this.cardCreate(data);
 }
 
 CardList.prototype = {
   prototype: CardList,
-  init: function ({ images, width, height }) {
+  cardCreate: function ({ images, width, height }) {
     images.forEach(({ download_url }, index) => {
       const data = {
         width,

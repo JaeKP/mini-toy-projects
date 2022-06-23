@@ -13,7 +13,7 @@ function Card({ width, height, index, imageUrl }) {
 
 
   // DOM에 반영한다.
-  document.querySelector(".container > .card-list:last-child").appendChild(this.divElem);
+  document.querySelector(".card-list:last-child").appendChild(this.divElem);
 }
 
 export { Card };
