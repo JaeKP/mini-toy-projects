@@ -1,4 +1,5 @@
-// 카드 컴포넌트를 생성한다.
+// Card 컴포넌트
+
 function Card({ width, height, index, imageUrl }) {
   this.divElem = document.createElement("div");
   this.divElem.style.width = width;
@@ -12,7 +13,7 @@ function Card({ width, height, index, imageUrl }) {
   this.divElem.classList.add("card-item");
 
 
-  // DOM에 반영한다.
+  // DOM에 반영
   document.querySelector(".card-list:last-child").appendChild(this.divElem);
 }
 

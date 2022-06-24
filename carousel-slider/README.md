@@ -99,7 +99,50 @@
 
 #### (3) 버튼 컴포넌트
 
-`fixed`를 사용하지 않았더니 대참사가 났다...
+position을 잘못 잡아서 고생 했다. 
+
+`absolute` => `fixed` => `absolute`
+
+1. 처음 구현 
+
+card-list가 부모인 상태로 absolute의 형태로 버튼을 구현했다. 
+
+실제 부모의 길이는 화면을 넘어서 길게 있기 때문에, 오른쪽 버튼을  화면에 보이는 위치에 놓는 
+
+```javascript
+this.rightButtonElem.style.left = `calc(${document.querySelector("body").offsetWidth}px - ${width} / 9.255)`;
+```
+
+생각해보니, carousel을 card-list가 x축으로 translate하면서 구현하는데 버튼 컴포넌트도 같이 돌아 가기때문에...ㅋ 
+
+
+
+2. 두번째 구현 
+
+```javascript
+  setButtonSize: function () {
+    const height = this.height;
+    const top = this.cardListElem.getBoundingClientRect().top + "px"
+
+    this.leftButtonElem.style.fontSize = `calc(${height}/3)`;
+    this.leftButtonElem.style.top = top;
+
+    this.rightButtonElem.style.fontSize = `calc(${height}/3)`;
+    this.rightButtonElem.style.top = top;
+
+    // fontSize / 3.255 = width
+    // this.rightButtonElem.style.left = `calc(${document.querySelector("body").offsetWidth}px - ${width} / 9.255)`;
+  },
+```
+
+
+
+
+
+3. 성공
+
+```javascript
+```
 
 
 
