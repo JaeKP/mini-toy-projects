@@ -1,6 +1,9 @@
+// Button 컴포넌트 
+
 function Button({ height, id }) {
   this.height = height;
-  this.cardListElem = document.querySelector(`#${id}`)
+  this.resizeState = false;  // resize 관련 속성
+  this.cardListElem = document.querySelector(`#${id}`) 
 
   this.leftButtonElem = document.createElement("div");
   this.rightButtonElem = document.createElement("div");
@@ -10,11 +13,11 @@ function Button({ height, id }) {
   this.rightButtonElem.classList.add("right");
   this.rightButtonElem.innerText = "❭";
 
+  // 버튼 사이즈, 위치 조정
   this.setButtonSize();
 
-  // DOM에 반영한다.
+  // DOM에 반영 
   document.querySelector(".carousel:last-child").append(this.leftButtonElem, this.rightButtonElem);
-
   this.init();
 }
 
@@ -26,23 +29,22 @@ Button.prototype = {
     let count = this.cardListElem.getAttribute("data-count");
     
     window.addEventListener("resize", () => {
-      // 버튼 사이즈 조정
-      this.setButtonSize();
+      clearTimeout(this.resizeState);
 
       // 캐러셀 이동 초기화
       this.cardListElem.setAttribute("data-count", 0);
       this.cardListElem.style.transform = "translate3d(0, 0, 0)";
       count = 0
+      
+      this.resizeState = setTimeout(()=> {
+        // 버튼 사이즈 조정
+        this.setButtonSize();
 
-      // 캐러셀 이동 조정
-      cardListWidth = this.cardListElem.offsetWidth;
-      totalCount = (cardListWidth - document.querySelector("body").offsetWidth) / 10;
-      console.log(`offsetWidth: ${this.cardListElem.offsetWidth}`)
-      console.log(`clientWidth: ${this.cardListElem.clientWidth}`)
-      console.log(`scrollWidth: ${this.cardListElem.scrollWidth}`)
-      console.log(this.cardListElem.getBoundingClientRect())
-      console.dir(this.cardListElem)
-      console.log(this.cardListElem.offsetWidth)
+        // 캐러셀 이동 조정
+        cardListWidth = this.cardListElem.offsetWidth;
+        totalCount = (cardListWidth - document.querySelector("body").offsetWidth) / 10;
+        console.log(`offsetWidth: ${this.cardListElem.offsetWidth}`)
+      }, 2000)
     });
 
     
@@ -66,18 +68,14 @@ Button.prototype = {
   },
   setButtonSize: function () {
     const height = this.height;
-    // const top = this.cardListElem.getBoundingClientRect().top + "px"
 
+    // 왼쪽 버튼 
     this.leftButtonElem.style.fontSize = `calc(${height}/3)`;
-    // this.leftButtonElem.style.top = top;
-    this.leftButtonElem.style.top = `calc(${height}/2 - ${height}/6)`;
+    this.leftButtonElem.style.top = `calc(${height}/2 - ${height}/4.5)`;
 
+    // 오른쪽 버튼
     this.rightButtonElem.style.fontSize = `calc(${height}/3)`;
-    // this.rightButtonElem.style.top = top;
-    this.rightButtonElem.style.top = `calc(${height}/2 - ${height}/6)`;
-
-    // fontSize / 3.255 = width
-    // this.rightButtonElem.style.left = `calc(${document.querySelector("body").offsetWidth}px - ${width} / 9.255)`;
+    this.rightButtonElem.style.top = `calc(${height}/2 - ${height}/4.5)`;
   },
 };
 

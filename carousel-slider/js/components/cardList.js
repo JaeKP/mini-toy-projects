@@ -1,17 +1,17 @@
+// CardList 컴포넌트
+
 import { Card } from "./card.js";
 
-// 카드리스트를 생성한다.
 function CardList(data) {
   this.cardListElem = document.createElement("div");
   this.cardListElem.classList.add("card-list");
   this.cardListElem.setAttribute("data-count", 0);
   this.cardListElem.setAttribute("id", data.id);
 
-
-  // CardList 생성하기
+  // DOM에 반영
   document.querySelector(".carousel:last-child").appendChild(this.cardListElem);
   
-  // Card 생성하기
+  // Card 컴포넌트 생성
   this.cardCreate(data);
 }
 
