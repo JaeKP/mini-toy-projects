@@ -8,9 +8,10 @@
 
 ## 1. 학습 내용
 
-바닐라 JS로 재사용할 수 있는 컴포넌트를 구현한다.  
+#### 바닐라 JS로 재사용할 수 있는 컴포넌트를 구현한다.  
 
-- `모듈화!`
+- `모듈화 !!!!!!! `
+
 - 객체 생성자 함수를 활용하여 컴포넌트를 구현함으로서, 코드의 가독성을 높인다. 
 
 <br>
@@ -67,7 +68,8 @@
 ```
 
 - 모듈은 특수한 키워드나 기능과 함께 사용되기에 `<script type="module">` 같은 속성을 설정해야 한다. 
-- 해당 스크립트가 모듈이란 걸 브라우저가 알 수 있게 해야 한다. 
+
+- 해당 스크립트가 모듈이란 걸 브라우저가 알 수 있게 해야 한다.
 
 <br>
 
@@ -112,22 +114,20 @@ create(cardData1);
 
 ```
 
-- Carousel 컴포넌트 생성 과정
-
+- **Carousel 컴포넌트 생성 과정**
   - Carousel생성 중 필요한 정보를 담은 data 객체를 생성한다. 
-
   - Carousel을 생성하는 함수를 호출 할 때,  인자로 위에 만든 data 객체를 넣는다.
-
   - Carousel 생성자 함수를 통해 해당 데이터를 반영하는 캐러셀이 구현된다.
 
--  [LoremPicsum](https://picsum.photos/)이라는 api를 활용하여 이미지를 받아온다. 
+<br>
 
+- **[LoremPicsum](https://picsum.photos/)이라는 api를 활용하여 이미지를 받아온다.** 
   - 받아온 이미지 리스트를 저장하고 Carousel 생성자 함수 호출!
-
   - 이미지 리스트: 여러개의 이미지 정보를 담은 객체의 리스트
 
-    | [이미지 리스트]<br /><img src="https://raw.githubusercontent.com/JaeKP/image_repo/main/img/image-20220622175210458.png"> | [이미지 정보 객체]<br /><img src="https://raw.githubusercontent.com/JaeKP/image_repo/main/img/image-20220622175150145.png"> |
-    | ------------------------------------------------------------ | ------------------------------------------------------------ |
+
+| [이미지 리스트]<br /><img src="https://raw.githubusercontent.com/JaeKP/image_repo/main/img/image-20220622175210458.png"> | [이미지 정보 객체]<br /><img src="https://raw.githubusercontent.com/JaeKP/image_repo/main/img/image-20220622175150145.png"> |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
 
 <br>
 
@@ -154,9 +154,9 @@ DOM구조는 다음과 같이 생성될 것이다.
 ...
 ```
 
-- 따라서 carousel 생성하는 생성자 함수에서 CardList와 Button은 생성하는 생성자 함수를 호출한다. 
+- 따라서 carousel 생성하는 생성자 함수에서 CardList와 Button은 생성하는 생성자 함수를 호출한다.
 
-- 인자로 받는 data객체에서 parentNode속성을 carousel 태그로 수정한 뒤,  CardList와 Button 생성자 함수를 호출 할 때 인자로 전달한다. 
+- 인자로 받는 data객체에서 parentNode속성을 carousel 태그로 수정한 뒤,  CardList와 Button 생성자 함수를 호출 할 때 인자로 전달한다.
 
   ```javascript
    // 부모 노드 속성 바꿔주기
@@ -207,7 +207,7 @@ export { CardList };
 
 ```
 
-- `cardCreate` 메서드를 생성하고 호출을 함으로서,  여러개의 카드 컴포넌트를 생성한다. 
+- **`cardCreate` 메서드를 생성하고 호출을 함으로서,  여러개의 카드 컴포넌트를 생성한다.** 
   - 파라미터로 넘어온 데이터 중  image 배열은 이미지에 대한 데이터가 담겨져 있는 객체의 배열이다. 
   - image 배열에 `forEach`메서드를 활용하여 배열 요소 각각 (각각 이미지)를 순회한다. 
   - 순회할 때마다, Card 생성자 함수를 호출한다.( 카드 컴포넌트 구성에 필요한 데이터를 재가공하여 인자로 넘겨준다. )
@@ -236,18 +236,18 @@ function Card({ width, height, index, imageUrl }) {
 export { Card };
 ```
 
-- 넘겨받은 데이터를 활용하여 카드의 css 속성을 변경한다. 
+- 넘겨받은 데이터를 활용하여 카드의 css 속성을 변경한다.
 
 - **`document.querySelector(".card-list:last-child").appendChild(this.divElem)`를 사용하지 않는 이유**
-  
+
   - querySelector를 card의 개수만큼 반복해야 한다.
-  
+
   - querySelector가 성능이 좋지 않다고 들어서 성능에 좋을 것 같지 않다. 
-  
+
   - 그래서 CardList에서 Card생성자 함수를 호출 할 때, parentNode를 인자로 전달하는 방식으로 수정했다. 
-  
+
     (모든 코드를 이와 같은 형식으로 수정) => index.js, carousel.js, cardList.js, card.js, button.js
-  
+
 
 <br>
 
@@ -255,20 +255,15 @@ export { Card };
 
 **`고려 사항`**
 
-- **버튼을 클릭시 CardList를 translate시킨다. (X축)**
-  - 버튼을 클릭 시, 어떤 CardList를 이동시키는지 알아야 한다.  
-  - translate 되는 범위를 계산해야 한다. 
-  - 현재 얼마나 translated되었는지 알아야 한다. 
-
-- **캐러셀 기준 수직 가운데에 위치해야 한다.** 
-- **resize이벤트가 발생할 시,** 
-  - Carousel 이동이 초기화 된다.
-  - Carousel의 사이즈를 반영하여 버튼의 크기와 위치가 변경되어야 한다.
-  - translated되는 범위도 재조정해야 한다. 
+| 기능                                                         | **세부 정보**                                                |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| **버튼을 클릭시 CardList를 translate한다. (X축)**            | - 버튼을 클릭 시, 어떤 CardList를 이동시키는지 알아야 한다.  <br />- translate 되는 범위를 계산해야 한다. <br />- 현재 얼마나 translated되었는지 알아야 한다. |
+| **Button은 캐러셀 기준 수직 가운데에 위치해야 한다.**        |                                                              |
+| **resize이벤트 발생 시, CardList와 Button을 재조정해야 한다.** | - CardList이동이 초기화 된다. <br />- CardList의 사이즈를 반영하여 Button의 크기와 위치가 변경되어야 한다. <br />- CardList가  translate되는 범위도 재조정해야 한다. |
 
 <br>
 
-**📌 버튼 클릭 시 CardList를 tranlate 한다.**
+📌 **버튼 클릭 시 CardList를 tranlate 한다.**
 
 ```javascript
     let cardListWidth = this.cardListElem.getBoundingClientRect().width;
@@ -290,22 +285,25 @@ export { Card };
     });
 ```
 
-- 하나의 카드리스트를 10번으로 나눠서 이동시키는 것으로 구현했다. 
-  - `cardListWidth`: 카드 리스트의 길이
-  - `totalCount`: ( 카드 리스트 -  현재 브라우저에 보이는 화면 너비 ) / 10  `한번 움직일때 마다 이동시켜야 길이`
-  - `count`: CardList의 data-count 속성을 가져온다. `현재 얼마나 슬라이드 되었는지 보여준다. `
+- **하나의 카드리스트를 10번으로 나누어 이동시키는 것으로 구현** 
+
+  | 변수            | 설명                               | 비고                                                     |
+  | --------------- | ---------------------------------- | -------------------------------------------------------- |
+  | `cardListWidth` | 카드 리스트의 길이                 |                                                          |
+  | `totalCount`    | 한번 움직일때 마다 이동시켜야 길이 | ( 카드 리스트 -  현재 브라우저에 보이는 화면 너비 ) / 10 |
+  | `count`         | CardList의 data-count 속성 값      | 현재 얼마나 슬라이드 되었는지 보여준다.                  |
 
 <br>
 
-- **슬라이드 할 때마다 x축으로 translate되고 data-count속성의 값이 수정한다.** 
-  - **오른쪽으로 버튼을 누르면 CardList의  data-count 속성은 1이 증가하고 X 축으로 translate 된다.** 
-  - **왼쪽 버튼을 누르면  CardList의 data-count 속성은 1이 감소하고 X 축으로 translate 된다.**
+- **버튼을 누를때 마다 CardList를 x축으로 translate하고 data-count속성 값을 수정한다.** 
+  - 오른쪽으로 버튼을 누르면 CardList의  data-count 속성은 1이 증가하고 X 축으로 translate 된다.
+  - 왼쪽 버튼을 누르면  CardList의 data-count 속성은 1이 감소하고 X 축으로 translate 된다.
   - data-count가 0이면 더이상 왼쪽으로 슬라이드 할 수 없기 때문에 조건문으로 분기를 처리했다. 
   - data-count가 10이되면 더이상 오른쪽으로 슬라이드 할 수 없기 때문에 조건문으로 분기를 처리 했다. 
 
 <br>
 
-**📌 버튼 위치를 Carousel 사이즈에 맞춰 조정한다.**
+📌 **Button은 캐러셀 기준 수직 가운데에 위치해야 한다.**
 
 ```javascript
     setButtonSize: function () {
@@ -323,7 +321,7 @@ export { Card };
 
 <br>
 
-**📌 resize 이벤트 발생 시 Carousel을 조정한다. **
+📌 **resize이벤트 발생 시, CardList와 Button을 재조정해야 한다.** 
 
 ```javascript
     window.addEventListener("resize", () => {
@@ -345,12 +343,15 @@ export { Card };
     });
 ```
 
-- resize할 시, 캐러셀 이동을 초기화한다. 
+- **resize할 시, 캐러셀 이동을 초기화한다.** 
   - CardList의 translate 속성 초기화
   - CardList의 data-count 속성을 0으로 변경
   - 변수 count를 0으로 초기화
-  
-- Button 위치와  캐러셀 이동 범위를 현재 너비 기준으로 변경한다. 
+
+
+<br>
+
+- **Button 위치와  캐러셀 이동 범위를 현재 너비 기준으로 변경한다.** 
   - `setTimeout`을 사용한 이유는 3-1)에서 확인할 수 있다. 
 
 <br>
@@ -367,9 +368,9 @@ export { Card };
 - resize이벤트가 발생하면 offsetWidth를 잡게 되는데, 실제로 carousel 사이즈가 변경되는 시간에 비해 이벤트를 catch하는 시간이 더 빠르다.
 - 즉, 변경 도중에 offsetWidth의 값을 가져오는 것이다. 
 
-**`setTimeout()`을 활용하여  resize 이벤트가 끝나고 Crousel 사이즈가 조정이 된 후에 offsetWidth의 값을 조회하는 방식으로 수정했다.** 
-
 <br>
+
+**`해결 방안` : setTimeout()을 활용하여  resize 이벤트가 끝나고 Crousel 사이즈가 조정이 된 후에 offsetWidth의 값을 조회하는 방식으로 수정** 
 
 ```javascript
     window.addEventListener("resize", () => {
@@ -400,23 +401,25 @@ export { Card };
 
 #### (1) CardList의 자식 태그로 Button 컴포넌트를 추가
 
-Button에 absolute를 주어 화면에 맞게 위치하도록 조정했다. 이렇게 구현하니 발생한 문제점은 다음과 같다. 
+Button에 `position: absolute`를 주어 화면에 맞게 위치하도록 조정했다. 이렇게 구현하니 발생한 문제점은 다음과 같다. 
 
-- CardList의 width는 브라우저 화면을 넘어서 길게 존재하다보니  오른쪽 버튼을 화면에 딱맞게 위치하도록 계산을 해야한다. 
+- CardList의 width는 브라우저 화면을 넘어서 길게 존재하다보니  오른쪽 버튼을 화면에 딱맞게 위치하도록 계산을 해야 한다.
 
   ```javascript
   this.rightButtonElem.style.left = `calc(${document.querySelector("body").offsetWidth}px - ${width} / 9.255)`;
   ```
 
-- CardList가 x축으로 이동하다보니,  translate로 이동시키면 버튼도 같이 이동한다. 🙄
+<br>
+
+- CardList가 x축으로 이동하다보니,  translate로 이동시키면 버튼도 같이 이동한다. 
+  - 버튼은 무조건 브라우저 화면에서 고정된 위치에 있어야 한다. 
+
 
 <br>
 
 #### (2) 오.. 이방법이 아니군! 그렇다면 fixed를 써야하나..?
 
-그래서 fixed는 브라우저 기준이기때문에 cardList의 y좌표를 구한 뒤, 이에 맞게 위치를 조정을 했다.
-
-아.뿔.사. fixed는 y축으로 스크롤해도 그대로 따라오네..? 해당 버튼은 캐러셀이 있는 범위에만 있어야한다.
+fixed는 ViewPort 기준이기때문에 CardList의 y좌표를 구한 뒤, 이에 맞게 위치를 조정을 했다.
 
 ```javascript
   setButtonSize: function () {
@@ -431,13 +434,16 @@ Button에 absolute를 주어 화면에 맞게 위치하도록 조정했다. 이�
   },
 ```
 
+- 아.뿔.사. `position: fixed`는 y축으로 스크롤해도 vp 기준이기 때문에 그대로 따라온다. 
+- 해당 버튼은 캐러셀이 있는 범위에만 있어야한다. 그래서 `position: fixed`로 구현하는 것은 잘못된 방식이였다. 
+
 <br>
 
 #### (3) 결국,  absolute를 사용하는 것이 맞구나! (Carousel 태그 추가)
 
 이전에 했던 방식과 달리 CardList의 자식으로 Button을 추가하는 것이 아닌 그 상위의 요소에 추가하면 된다.
 
-그래서 CardList에 Carousel이라는 부모를 추가하여 Carousel의 자식으로 Button을 추가했다. (현재방식) 
+**그래서 CardList에 Carousel이라는 부모를 추가하여 Carousel의 자식으로 Button을 추가했다. (현재방식)** 
 
 ```css
 .carousel {
@@ -459,7 +465,7 @@ Button에 absolute를 주어 화면에 맞게 위치하도록 조정했다. 이�
 }
 ```
 
-그냥 이렇게 간단하게 구현가능.... 🤯 Button의 top만 수직 가운데에 위치하도록 js로 계산해서 추가해줬다. 
+<br>
 
 ```javascript
   setButtonSize: function () {
@@ -474,5 +480,7 @@ Button에 absolute를 주어 화면에 맞게 위치하도록 조정했다. 이�
     this.rightButtonElem.style.top = `calc(${height}/2 - ${height}/4.5)`;
   },
 ```
+
+- 간단하게 구현이 가능하다.  Button의 top만 수직 가운데에 위치하도록 js로 계산하여 추가했다. 
 
 <br>
