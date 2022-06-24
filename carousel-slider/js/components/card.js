@@ -1,6 +1,6 @@
 // Card 컴포넌트
 
-function Card({ width, height, index, imageUrl }) {
+function Card({ width, height, index, imageUrl, parentNode }) {
   this.divElem = document.createElement("div");
   this.divElem.style.width = width;
   this.divElem.style.height = height;
@@ -13,8 +13,8 @@ function Card({ width, height, index, imageUrl }) {
   this.divElem.classList.add("card-item");
 
 
-  // DOM에 반영
-  document.querySelector(".card-list:last-child").appendChild(this.divElem);
+  // DOM에 반영: document.querySelector(".card-list:last-child").appendChild(this.divElem);
+  parentNode.appendChild(this.divElem);
 }
 
 export { Card };
