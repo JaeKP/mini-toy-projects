@@ -67,11 +67,9 @@
 </html>
 ```
 
-- **모듈은 특수한 키워드나 기능과 함께 사용되기에 `<script type="module">` 같은 속성을 설정해야 한다.** 
+- 모듈은 특수한 키워드나 기능과 함께 사용되기에 `<script type="module">` 같은 속성을 설정해야 한다. 
 
-<br>
-
-- **해당 스크립트가 모듈이란 걸 브라우저가 알 수 있게 해야 한다.** 
+- 해당 스크립트가 모듈이란 걸 브라우저가 알 수 있게 해야 한다.
 
 <br>
 
@@ -156,11 +154,9 @@ DOM구조는 다음과 같이 생성될 것이다.
 ...
 ```
 
-- **따라서 carousel 생성하는 생성자 함수에서 CardList와 Button은 생성하는 생성자 함수를 호출한다.** 
+- 따라서 carousel 생성하는 생성자 함수에서 CardList와 Button은 생성하는 생성자 함수를 호출한다.
 
-<br>
-
-- **인자로 받는 data객체에서 parentNode속성을 carousel 태그로 수정한 뒤,  CardList와 Button 생성자 함수를 호출 할 때 인자로 전달한다.** 
+- 인자로 받는 data객체에서 parentNode속성을 carousel 태그로 수정한 뒤,  CardList와 Button 생성자 함수를 호출 할 때 인자로 전달한다.
 
   ```javascript
    // 부모 노드 속성 바꿔주기
@@ -240,9 +236,7 @@ function Card({ width, height, index, imageUrl }) {
 export { Card };
 ```
 
-- **넘겨받은 데이터를 활용하여 카드의 css 속성을 변경한다.** 
-
-<br>
+- 넘겨받은 데이터를 활용하여 카드의 css 속성을 변경한다.
 
 - **`document.querySelector(".card-list:last-child").appendChild(this.divElem)`를 사용하지 않는 이유**
 
@@ -261,27 +255,11 @@ export { Card };
 
 **`고려 사항`**
 
-1. **버튼을 클릭시 CardList를 translate시킨다. (X축)**
-
-   - 버튼을 클릭 시, 어떤 CardList를 이동시키는지 알아야 한다.  
-
-   - translate 되는 범위를 계산해야 한다. 
-
-   - 현재 얼마나 translated되었는지 알아야 한다. 
-
-<br>
-
-2. **캐러셀 기준 수직 가운데에 위치해야 한다.** 
-
-<br>
-
-3. **resize이벤트가 발생할 시,** 
-
-   - Carousel 이동이 초기화 된다.
-
-   - Carousel의 사이즈를 반영하여 버튼의 크기와 위치가 변경되어야 한다.
-
-   - translated되는 범위도 재조정해야 한다. 
+| 기능                                                         | **세부 정보**                                                |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| **버튼을 클릭시 CardList를 translate한다. (X축)**            | - 버튼을 클릭 시, 어떤 CardList를 이동시키는지 알아야 한다.  <br />- translate 되는 범위를 계산해야 한다. <br />- 현재 얼마나 translated되었는지 알아야 한다. |
+| **Button은 캐러셀 기준 수직 가운데에 위치해야 한다.**        |                                                              |
+| **resize이벤트 발생 시, CardList와 Button을 재조정해야 한다.** | - CardList이동이 초기화 된다. <br />- CardList의 사이즈를 반영하여 Button의 크기와 위치가 변경되어야 한다. <br />- CardList가  translate되는 범위도 재조정해야 한다. |
 
 <br>
 
@@ -325,7 +303,7 @@ export { Card };
 
 <br>
 
-📌 **버튼 위치를 Carousel 사이즈에 맞춰 조정한다.**
+📌 **Button은 캐러셀 기준 수직 가운데에 위치해야 한다.**
 
 ```javascript
     setButtonSize: function () {
@@ -343,7 +321,7 @@ export { Card };
 
 <br>
 
-📌 **resize 이벤트 발생 시 Carousel을 조정한다.** 
+📌 **resize이벤트 발생 시, CardList와 Button을 재조정해야 한다.** 
 
 ```javascript
     window.addEventListener("resize", () => {
@@ -390,9 +368,9 @@ export { Card };
 - resize이벤트가 발생하면 offsetWidth를 잡게 되는데, 실제로 carousel 사이즈가 변경되는 시간에 비해 이벤트를 catch하는 시간이 더 빠르다.
 - 즉, 변경 도중에 offsetWidth의 값을 가져오는 것이다. 
 
-**`setTimeout()`을 활용하여  resize 이벤트가 끝나고 Crousel 사이즈가 조정이 된 후에 offsetWidth의 값을 조회하는 방식으로 수정했다.** 
-
 <br>
+
+**`해결 방안` : setTimeout()을 활용하여  resize 이벤트가 끝나고 Crousel 사이즈가 조정이 된 후에 offsetWidth의 값을 조회하는 방식으로 수정** 
 
 ```javascript
     window.addEventListener("resize", () => {
@@ -423,23 +401,25 @@ export { Card };
 
 #### (1) CardList의 자식 태그로 Button 컴포넌트를 추가
 
-Button에 absolute를 주어 화면에 맞게 위치하도록 조정했다. 이렇게 구현하니 발생한 문제점은 다음과 같다. 
+Button에 `position: absolute`를 주어 화면에 맞게 위치하도록 조정했다. 이렇게 구현하니 발생한 문제점은 다음과 같다. 
 
-- CardList의 width는 브라우저 화면을 넘어서 길게 존재하다보니  오른쪽 버튼을 화면에 딱맞게 위치하도록 계산을 해야한다. 
+- CardList의 width는 브라우저 화면을 넘어서 길게 존재하다보니  오른쪽 버튼을 화면에 딱맞게 위치하도록 계산을 해야 한다.
 
   ```javascript
   this.rightButtonElem.style.left = `calc(${document.querySelector("body").offsetWidth}px - ${width} / 9.255)`;
   ```
 
-- CardList가 x축으로 이동하다보니,  translate로 이동시키면 버튼도 같이 이동한다. 🙄
+<br>
+
+- CardList가 x축으로 이동하다보니,  translate로 이동시키면 버튼도 같이 이동한다. 
+  - 버튼은 무조건 브라우저 화면에서 고정된 위치에 있어야 한다. 
+
 
 <br>
 
 #### (2) 오.. 이방법이 아니군! 그렇다면 fixed를 써야하나..?
 
-그래서 fixed는 브라우저 기준이기때문에 cardList의 y좌표를 구한 뒤, 이에 맞게 위치를 조정을 했다.
-
-아.뿔.사. fixed는 y축으로 스크롤해도 그대로 따라오네..? 해당 버튼은 캐러셀이 있는 범위에만 있어야한다.
+fixed는 ViewPort 기준이기때문에 CardList의 y좌표를 구한 뒤, 이에 맞게 위치를 조정을 했다.
 
 ```javascript
   setButtonSize: function () {
@@ -454,13 +434,16 @@ Button에 absolute를 주어 화면에 맞게 위치하도록 조정했다. 이�
   },
 ```
 
+- 아.뿔.사. `position: fixed`는 y축으로 스크롤해도 vp 기준이기 때문에 그대로 따라온다. 
+- 해당 버튼은 캐러셀이 있는 범위에만 있어야한다. 그래서 `position: fixed`로 구현하는 것은 잘못된 방식이였다. 
+
 <br>
 
 #### (3) 결국,  absolute를 사용하는 것이 맞구나! (Carousel 태그 추가)
 
 이전에 했던 방식과 달리 CardList의 자식으로 Button을 추가하는 것이 아닌 그 상위의 요소에 추가하면 된다.
 
-그래서 CardList에 Carousel이라는 부모를 추가하여 Carousel의 자식으로 Button을 추가했다. (현재방식) 
+**그래서 CardList에 Carousel이라는 부모를 추가하여 Carousel의 자식으로 Button을 추가했다. (현재방식)** 
 
 ```css
 .carousel {
@@ -482,7 +465,7 @@ Button에 absolute를 주어 화면에 맞게 위치하도록 조정했다. 이�
 }
 ```
 
-그냥 이렇게 간단하게 구현가능.... 🤯 Button의 top만 수직 가운데에 위치하도록 js로 계산해서 추가해줬다. 
+<br>
 
 ```javascript
   setButtonSize: function () {
@@ -497,5 +480,7 @@ Button에 absolute를 주어 화면에 맞게 위치하도록 조정했다. 이�
     this.rightButtonElem.style.top = `calc(${height}/2 - ${height}/4.5)`;
   },
 ```
+
+- 간단하게 구현이 가능하다.  Button의 top만 수직 가운데에 위치하도록 js로 계산하여 추가했다. 
 
 <br>
