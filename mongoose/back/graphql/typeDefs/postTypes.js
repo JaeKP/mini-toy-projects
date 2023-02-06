@@ -3,7 +3,7 @@ import { gql } from "apollo-server-express";
 export default gql`
   type Query {
     getPost: [Post]
-    getPostDetail(postId: ID!): Post
+    getPostDetail(postId: ID!): PostDetail
   }
 
   type Mutation {
@@ -21,9 +21,13 @@ export default gql`
     updateAt: Date
   }
 
-  type Response {
-    response: Boolean
+  type PostDetail {
+    id: ID!
+    user: String!
+    title: String!
+    content: String
+    createdAt: Date
+    updateAt: Date
+    comments: [Comment]!
   }
-
-  scalar Date
 `;
