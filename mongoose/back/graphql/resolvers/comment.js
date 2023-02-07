@@ -11,8 +11,11 @@ export default {
     writeComment: async (_, { postId, user, content }) => {
       try {
         const post = await Post.findById(postId);
+        if (!post) return new Error("Incorrect postId");
+
         const comment = new Comment({ user, content, post });
         await Promise.all([comment.save(), Post.updateOne({ _id: postId }, { $push: { comments: comment } })]);
+
         return comment;
       } catch (error) {
         console.log(error);
@@ -31,6 +34,9 @@ export default {
           Comment.findOneAndUpdate({ _id: commentId }, { content }, { new: true }),
           Post.updateOne({ "comments._id": commentId }, { "comments.$.content": content }),
         ]);
+
+        if (!comment) return new Error("Incorrect commentId");
+
         return comment;
       } catch (error) {
         console.log(error);
@@ -45,10 +51,13 @@ export default {
      */
     deleteComment: async (_, { commentId }) => {
       try {
-        await Promise.all([
+        const [comment] = await Promise.all([
           Comment.findOneAndDelete({ _id: commentId }),
-          Post.updateOne({ "comments._id": commentId }, { $unset: { "comments.$": 1 } }),
+          Post.updateOne({ "comments._id": commentId }, { $pull: { comments: { "comments._id": commentId } } }),
         ]);
+
+        if (!comment) return new Error("Incorrect commentId");
+
         return { response: true };
       } catch (error) {
         console.log(error);

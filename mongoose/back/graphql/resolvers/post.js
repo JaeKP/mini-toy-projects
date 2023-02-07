@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-import { Post } from "../../models/index.js";
+import { Post, Comment } from "../../models/index.js";
+import bcrypt from "bcrypt";
 
 export default {
   Query: {
@@ -26,6 +27,8 @@ export default {
     getPostDetail: async (_, { postId }) => {
       try {
         const post = await Post.findById(postId);
+        if (!post) return new Error("Incorrect postId");
+
         return post;
       } catch (error) {
         console.log(error);
@@ -36,7 +39,7 @@ export default {
   Mutation: {
     /**
      * 포스트 작성
-     * @param : username!, title!, content
+     * @param : username!,password!, title!, content
      * @returns : Post
      */
     writePost: async (_, args) => {
@@ -52,14 +55,19 @@ export default {
 
     /**
      * 포스트 수정
-     * @param : username!, title, content
+     * @param : username!, password!, title, content
      * @returns : Post
      */
-    updatePost: async (_, { postId, title, content }) => {
-      console.log(postId);
+    updatePost: async (_, { postId, password, title, content }) => {
       try {
         const post = await Post.findById(postId);
-        console.log(post);
+        if (!post) return new Error("Incorrect postId");
+
+        // 비밀번호 검사
+        const isMatch = await bcrypt.compare(password, post.password);
+        if (!isMatch) return new Error("Incorrect password");
+
+        // 데이터 수정
         if (title) post.title = title;
         post.content = content;
         await post.save();
@@ -72,12 +80,21 @@ export default {
 
     /**
      * 포스트 삭제
-     * @param : postId!
+     * @param : postId!, password!
      * @returns : {response : Boolean}
      */
-    deletePost: async (_, { postId }) => {
+    deletePost: async (_, { postId, password }) => {
       try {
-        const post = await Post.findByIdAndDelete(postId);
+        const post = await Post.findById(postId);
+        if (!post) return new Error("Incorrect postId");
+
+        // 비밀번호 검사
+        const isMatch = await bcrypt.compare(password, post.password);
+        if (!isMatch) return new Error("Incorrect password");
+
+        // 삭제
+        await Post.deleteOne({ _id: postId });
+        await Comment.deleteMany({ post: postId });
         return { response: true };
       } catch (error) {
         console.log(error);
