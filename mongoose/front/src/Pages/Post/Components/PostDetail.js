@@ -5,7 +5,7 @@ const useStyle = makeStyles(() => ({
   section: {
     display: "flex",
     flexDirection: "column",
-    gap: "2rem",
+    gap: "3rem",
     marginTop: "4rem",
   },
 

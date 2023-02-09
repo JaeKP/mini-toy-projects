@@ -54,6 +54,7 @@ const DeletePostForm = ({ open, onClose, id }) => {
         <TextField
           id="delete-password"
           label="Password"
+          type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="please input post password"

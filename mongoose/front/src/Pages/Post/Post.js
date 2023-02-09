@@ -1,16 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { createPortal } from "react-dom";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { makeStyles } from "@material-ui/core";
 import { useQuery } from "@apollo/client";
 import { postQuery } from "../../Queries";
-import { PostDetail, UpdatePostForm, DeletePostForm } from "./Components";
+import { PostDetail, UpdatePostForm, DeletePostForm, CommentForm, CommentList } from "./Components";
 
 const el = document.getElementById("modal-root");
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "5rem",
+  },
+}));
+
 const Post = () => {
   const { postId } = useParams();
-  const { data, loading, error } = useQuery(postQuery.GET_POSTDETAIL, {
+  const classes = useStyles();
+  const { loading, data } = useQuery(postQuery.GET_POSTDETAIL, {
     variables: { postId },
     onCompleted: ({ getPostDetail }) => {
       setPostData(getPostDetail);
@@ -41,9 +51,13 @@ const Post = () => {
     setDeleteModalStatus(false);
   };
 
+  if (loading) return;
+
   return (
-    <>
+    <section className={classes.root}>
       <PostDetail postData={postData} openUpdateModal={openUpdateModal} openDeleteModal={openDeleteModal} />
+      {postData.comments && <CommentList commentData={postData.comments} id={postData.id} />}
+      <CommentForm id={postData.id} />
       {updateModalStatus &&
         createPortal(
           <UpdatePostForm
@@ -56,7 +70,7 @@ const Post = () => {
         )}
       {deleteModalStauts &&
         createPortal(<DeletePostForm open={deleteModalStauts} onClose={closeDeleteModal} id={postData.id} />, el)}
-    </>
+    </section>
   );
 };
 export default Post;

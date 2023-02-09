@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { createPortal } from "react-dom";
 import { useQuery } from "@apollo/client";
 import { postQuery } from "../../Queries";
@@ -10,7 +10,7 @@ const el = document.getElementById("modal-root");
 const Community = () => {
   const [listData, setListData] = useState([]);
   const [modalStatus, setModalStatus] = useState(false);
-  const { data } = useQuery(postQuery.GET_POST, {
+  useQuery(postQuery.GET_POST, {
     onCompleted: ({ getPost }) => {
       setListData(getPost);
     },
