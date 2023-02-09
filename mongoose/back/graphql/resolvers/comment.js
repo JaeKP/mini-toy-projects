@@ -53,7 +53,7 @@ export default {
       try {
         const [comment] = await Promise.all([
           Comment.findOneAndDelete({ _id: commentId }),
-          Post.updateOne({ "comments._id": commentId }, { $pull: { comments: { "comments._id": commentId } } }),
+          Post.updateOne({ "comments._id": commentId }, { $pull: { comments: { _id: commentId } } }),
         ]);
 
         if (!comment) return new Error("Incorrect commentId");
